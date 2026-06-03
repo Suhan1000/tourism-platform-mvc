@@ -1,0 +1,122 @@
+﻿@{
+    ViewData["Title"] = "Book Tour";
+    var tour = ViewBag.Tour as TourismPlatform.Models.Tour;
+}
+
+<div class="container my-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-calendar-check"></i> Book Tour: @tour.Name
+                    </h4>
+                </div>
+                <div class="card-body">
+
+                    <!-- Tour Information Display -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="p-3 bg-light rounded">
+                                <h5 class="text-primary">Tour Details</h5>
+                                <p><strong>Destination:</strong> @tour.Destination</p>
+                                <p><strong>Duration:</strong> @tour.Duration days</p>
+                                <p><strong>Price per person:</strong> $@tour.Price</p>
+                                <p><strong>Max participants:</strong> @tour.MaxParticipants people</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 bg-light rounded">
+                                <h5 class="text-success">Tour Provider</h5>
+                                <p><strong>@tour.Agency.AgencyName</strong></p>
+                                <p><i class="bi bi-envelope"></i> @tour.Agency.ContactInfo</p>
+                                <p><i class="bi bi-info-circle"></i> @tour.Agency.Description</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Booking Form -->
+                    <form asp-controller="Bookings" asp-action="Create" method="post">
+                        <input type="hidden" name="tourId" value="@tour.Id" />
+
+                        <div class="mb-3">
+                            <label for="numberOfPeople" class="form-label">
+                                <i class="bi bi-people"></i> Number of People
+                            </label>
+                            <input type="number"
+                                   name="numberOfPeople"
+                                   id="numberOfPeople"
+                                   class="form-control"
+                                   min="1"
+                                   max="@tour.MaxParticipants"
+                                   value="1"
+                                   required />
+                            <div class="form-text">Maximum @tour.MaxParticipants people allowed</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="tourDate" class="form-label">
+                                <i class="bi bi-calendar"></i> Preferred Tour Date
+                            </label>
+                            <input type="date"
+                                   name="tourDate"
+                                   id="tourDate"
+                                   class="form-control"
+                                   min="@DateTime.Now.ToString("yyyy-MM-dd")"
+                                   required />
+                            <div class="form-text">Select your preferred tour date</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                <i class="bi bi-cash"></i> Total Amount
+                            </label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="text"
+                                       id="totalAmount"
+                                       class="form-control"
+                                       readonly
+                                       value="@tour.Price" />
+                            </div>
+                            <div class="form-text">Total cost will update based on number of people</div>
+                        </div>
+
+                        <!-- Booking Summary -->
+                        <div class="alert alert-info">
+                            <h6><i class="bi bi-info-circle"></i> Booking Summary</h6>
+                            <p class="mb-1"><strong>Tour:</strong> @tour.Name</p>
+                            <p class="mb-1"><strong>Destination:</strong> @tour.Destination</p>
+                            <p class="mb-0"><strong>Duration:</strong> @tour.Duration days</p>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="d-flex justify-content-between">
+                            <a href="@Url.Action("Index", "Tours")" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left"></i> Back to Tours
+                            </a>
+                            <button type="submit" class="btn btn-success btn-lg">
+                                <i class="bi bi-check-circle"></i> Confirm Booking
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for Total Amount Calculation -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const peopleInput = document.getElementById('numberOfPeople');
+        const totalAmount = document.getElementById('totalAmount');
+        const pricePerPerson = @tour.Price;
+
+        // Update total when number of people changes
+        peopleInput.addEventListener('input', function() {
+            const total = this.value * pricePerPerson;
+            totalAmount.value = total.toFixed(2);
+        });
+    });
+</script>
