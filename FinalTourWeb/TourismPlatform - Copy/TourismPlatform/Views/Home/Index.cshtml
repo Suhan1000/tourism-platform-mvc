@@ -1,0 +1,141 @@
+﻿@{
+    ViewData["Title"] = "Welcome to Tourism Platform";
+}
+
+<!-- Hero Section - Big Travel Banner with Background Image -->
+<div class="text-white text-center py-5 mb-0" style="background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1800&q=80') no-repeat center center/cover;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8 mx-auto" style="background: rgba(0,0,0,0.5); padding: 2rem; border-radius: 15px;">
+                <h1 class="display-4 fw-bold mb-4 text-warning">
+                    <i class="bi bi-globe"></i> Discover Amazing Destinations
+                </h1>
+                <p class="lead mb-4 text-light">
+                    Welcome to your gateway for incredible travel experiences!
+                    Find the perfect tour, explore new cultures, and create unforgettable memories.
+                </p>
+
+                <!-- Call-to-action buttons -->
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+               
+
+                    @if (!User.Identity!.IsAuthenticated)
+                    {
+                        <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-outline-light btn-lg">
+                            <i class="bi bi-person-plus"></i> Join Our Community
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="#" class="btn btn-outline-light btn-lg">
+                            <i class="bi bi-bookmark"></i> My Bookings
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Features Section -->
+<div class="container my-5 py-5">
+    <div class="row text-center mb-5">
+        <div class="col-lg-8 mx-auto">
+            <h2 class="display-5 fw-bold mb-3 text-success">Why Choose Tourism Platform?</h2>
+            <p class="lead text-muted">
+                We make travel planning simple, safe, and memorable for everyone.
+            </p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Card 1 -->
+        <div class="col-lg-4 col-md-6">
+            <div class="card h-100 shadow border-0">
+                <img src="https://images.unsplash.com/photo-1530569673472-307dc017a82d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                     class="card-img-top" alt="Safe Travel">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-bold text-success mb-3">Safe & Trusted</h5>
+                    <p class="card-text text-muted">
+                        All our tours are verified and our guides are certified professionals.
+                        Your safety is our top priority.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col-lg-4 col-md-6">
+            <div class="card h-100 shadow border-0">
+                <img src="https://images.unsplash.com/photo-1501555088652-021faa106b9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                     class="card-img-top" alt="Experiences">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-bold text-danger mb-3">Unforgettable Experiences</h5>
+                    <p class="card-text text-muted">
+                        Create lasting memories with unique and authentic adventures.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="col-lg-4 col-md-6 mx-auto">
+            <div class="card h-100 shadow border-0">
+                <img src="https://images.unsplash.com/photo-1588200908342-23b585c03e26?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                     class="card-img-top" alt="Support">
+                <div class="card-body text-center">
+                    <h5 class="card-title fw-bold text-warning mb-3">24/7 Support</h5>
+                    <p class="card-text text-muted">
+                        Our friendly support team is always ready to help you before, during, and after your journey.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Student Table Section -->
+<div class="container my-5">
+    <h3 class="fw-bold text-center text-success mb-4">Student Members</h3>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered shadow text-center">
+            <thead class="table-warning">
+                <tr>
+                    <th>Student Name</th>
+                    <th>Student ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Suhan Bishwakarma</td>
+                    <td>20029804</td>
+                </tr>
+                <tr>
+                    <td>Punam Thapa</td>
+                    <td>20028361</td>
+                </tr>
+                <tr>
+                    <td>Subash Lama</td>
+                    <td>20039920</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Call-to-Action Section -->
+<div class="text-white text-center py-5" style="background: linear-gradient(45deg, #ff7e5f, #feb47b);">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h3 class="h1 fw-bold mb-3">Ready to Start Your Adventure?</h3>
+                <p class="lead mb-4">
+                    Don’t wait any longer! Browse our amazing tours and find your next destination today.
+                </p>
+                <a href="@Url.Action("Index", "Tours")" class="btn btn-dark btn-lg shadow">
+                    <i class="bi bi-compass"></i> Explore Tours Now
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

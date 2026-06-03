@@ -1,0 +1,225 @@
+﻿@model TourismPlatform.Models.Tourist
+@{
+    ViewData["Title"] = "Tourist Dashboard";
+}
+
+<!-- Header Section -->
+<div class="bg-info text-white py-4 mb-4">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h2><i class="bi bi-backpack"></i> Welcome, @Model.FirstName @Model.LastName!</h2>
+                <p class="mb-0">Your Travel Dashboard - Discover amazing adventures</p>
+            </div>
+            <div class="col-md-4 text-end">
+                <span class="badge bg-light text-dark fs-6">
+                    <i class="bi bi-compass"></i> Explorer
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+
+        <!-- Travel Stats -->
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card border-info h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-calendar-check text-info" style="font-size: 2.5rem;"></i>
+                    <h4 class="mt-2">@Model.Bookings.Count</h4>
+                    <p class="text-muted mb-0">Total Bookings</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card border-success h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-check-circle text-success" style="font-size: 2.5rem;"></i>
+                    <h4 class="mt-2">@Model.Bookings.Count(b => b.Status == TourismPlatform.Models.BookingStatus.Completed)</h4>
+                    <p class="text-muted mb-0">Completed Tours</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card border-warning h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-clock text-warning" style="font-size: 2.5rem;"></i>
+                    <h4 class="mt-2">@Model.Bookings.Count(b => b.Status == TourismPlatform.Models.BookingStatus.Pending || b.Status == TourismPlatform.Models.BookingStatus.Confirmed)</h4>
+                    <p class="text-muted mb-0">Upcoming Tours</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card border-primary h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-cash text-primary" style="font-size: 2.5rem;"></i>
+                    <h4 class="mt-2">$@Model.Bookings.Sum(b => b.TotalAmount).ToString("N0")</h4>
+                    <p class="text-muted mb-0">Total Spent</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-info-gradient text-white">
+                    <h5 class="mb-0"><i class="bi bi-lightning"></i> Quick Actions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <!-- Browse Tours -->
+                        <div class="col-md-3">
+                            <a href="@Url.Action("Index", "Tours")" class="btn btn-primary-gradient w-100">
+                                <i class="bi bi-search"></i> Browse Tours
+                            </a>
+                        </div>
+
+                        <!-- My Feedback -->
+                        <div class="col-md-3">
+                            <a href="@Url.Action("MyFeedback", "Feedback")" class="btn btn-warning w-100">
+                                <i class="bi bi-chat-left-text"></i> My Feedback
+                            </a>
+                        </div>
+
+                        <!-- Update Profile -->
+                        <div class="col-md-3">
+                            <a href="#" class="btn btn-warning-gradient w-100" onclick="alert('Coming soon! New features will unlock here.')">
+                                <i class="bi bi-person-gear"></i> Update Profile
+                            </a>
+                        </div>
+
+                        <!-- Optional placeholder / future feature -->
+                        <div class="col-md-3">
+                            <a href="#" class="btn btn-warning-gradient w-100" onclick="alert('Coming soon! New features will unlock here.')">
+                                <i class="bi bi-stars"></i> More Features
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upcoming Bookings -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="bi bi-calendar-event"></i> Your Upcoming Tours</h5>
+                </div>
+                <div class="card-body">
+                    @{
+                        var upcomingBookings = Model.Bookings
+                        .Where(b => b.Status == TourismPlatform.Models.BookingStatus.Confirmed || b.Status == TourismPlatform.Models.BookingStatus.Pending)
+                        .OrderBy(b => b.TourDate)
+                        .ToList();
+                    }
+
+                    @if (upcomingBookings.Any())
+                    {
+                        <div class="row">
+                            @foreach (var booking in upcomingBookings.Take(3))
+                            {
+                                <div class="col-md-4 mb-3">
+                                    <div class="card border-left-primary h-100">
+                                        <div class="card-body">
+                                            <h6 class="card-title">@booking.Tour.Name</h6>
+                                            <p class="card-text">
+                                                <small class="text-muted">
+                                                    <i class="bi bi-geo-alt"></i> @booking.Tour.Destination<br>
+                                                    <i class="bi bi-calendar"></i> @booking.TourDate.ToString("MMM dd, yyyy")<br>
+                                                    <i class="bi bi-people"></i> @booking.NumberOfPeople people<br>
+                                                    <i class="bi bi-cash"></i> $@booking.TotalAmount
+                                                </small>
+                                            </p>
+                                            <span class="badge bg-@(booking.Status == TourismPlatform.Models.BookingStatus.Confirmed ? "success" : "warning")">
+                                                @booking.Status
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        @if (upcomingBookings.Count > 3)
+                        {
+                            <div class="text-center mt-3">
+                                <a href="#" class="btn btn-outline-primary">
+                                    View All @upcomingBookings.Count Upcoming Tours
+                                </a>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="text-center py-4">
+                            <i class="bi bi-calendar-x text-muted" style="font-size: 4rem;"></i>
+                            <h4 class="text-muted mt-3">No upcoming tours</h4>
+                            <p class="text-muted">Ready for your next adventure?</p>
+                            <a href="@Url.Action("Index", "Tours")" class="btn btn-primary">
+                                <i class="bi bi-search"></i> Discover Tours
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popular Tours Section -->
+    <div class="row" id="popular-tours">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="bi bi-star"></i> Popular Tours Right Now</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">Discover what other travelers are booking!</p>
+
+                    <!-- Placeholder for popular tours -->
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="card bg-light">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-mountain text-primary" style="font-size: 3rem;"></i>
+                                    <h6 class="mt-2">Mountain Adventures</h6>
+                                    <p class="small text-muted">Explore breathtaking peaks</p>
+                                    <a href="@Url.Action("Index", "Tours")" class="btn btn-sm btn-primary">View Tours</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <div class="card bg-light">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-water text-info" style="font-size: 3rem;"></i>
+                                    <h6 class="mt-2">Beach Getaways</h6>
+                                    <p class="small text-muted">Relax by crystal clear waters</p>
+                                    <a href="@Url.Action("Index", "Tours")" class="btn btn-sm btn-info">View Tours</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <div class="card bg-light">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-building text-success" style="font-size: 3rem;"></i>
+                                    <h6 class="mt-2">City Tours</h6>
+                                    <p class="small text-muted">Discover urban culture</p>
+                                    <a href="@Url.Action("Index", "Tours")" class="btn btn-sm btn-success">View Tours</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,149 @@
+﻿@{
+    ViewData["Title"] = "Choose Your Account Type";
+}
+
+<!-- Header Section -->
+<div class="bg-primary text-white text-center py-5">
+    <div class="container">
+        <h1 class="display-5 fw-bold mb-3">
+            <i class="bi bi-person-gear"></i> Choose Your Account Type
+        </h1>
+        <p class="lead">
+            Select the option that best describes you to get started with Tourism Platform
+        </p>
+    </div>
+</div>
+
+<!-- Role Selection Cards -->
+<div class="container my-5">
+    <div class="row g-4 justify-content-center">
+
+        <!-- Travel Agency Card -->
+        <div class="col-lg-4 col-md-6">
+            <div class="card h-100 text-center border-primary role-card">
+                <div class="card-body p-4">
+                    <!-- Large Icon -->
+                    <div class="mb-3">
+                        <i class="bi bi-building text-primary" style="font-size: 4rem;"></i>
+                    </div>
+
+                    <!-- Title -->
+                    <h4 class="card-title fw-bold text-primary mb-3">Travel Agency</h4>
+
+                    <!-- Description -->
+                    <p class="card-text text-muted mb-4">
+                        I represent a travel agency or company. I want to manage multiple tours,
+                        hire guides, and run a travel business.
+                    </p>
+
+                    <!-- Features List -->
+                    <ul class="list-unstyled text-start mb-4">
+                        <li class="mb-2"><i class="bi bi-check-circle text-success"></i> Unlimited tours</li>
+                        <li class="mb-2"><i class="bi bi-check-circle text-success"></i> Team management</li>
+                        <li class="mb-2"><i class="bi bi-check-circle text-success"></i> Advanced analytics</li>
+                        <li class="mb-2"><i class="bi bi-check-circle text-success"></i> Business tools</li>
+                    </ul>
+
+                    <!-- Select Button -->
+                    <form asp-controller="RoleSelection" asp-action="SelectRole" method="post">
+                        <input type="hidden" name="userType" value="TravelAgency" />
+                        <button type="submit" class="btn btn-primary btn-lg w-100">
+                            <i class="bi bi-building"></i> Choose Agency Account
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tour Guide Card -->
+        <div class="col-lg-4 col-md-6">
+            <div class="card h-100 text-center border-success role-card">
+                <div class="card-body p-4">
+                    <!-- Large Icon -->
+                    <div class="mb-3">
+                        <i class="bi bi-person-badge text-success" style="font-size: 4rem;"></i>
+                    </div>
+
+                    <!-- Title -->
+                    <h4 class="card-title fw-bold text-success mb-3">Tour Guide</h4>
+
+                    <!-- Description -->
+                    <p class="card-text text-muted mb-4">
+                        I'm an individual tour guide. I want to offer my own tours and
+                        connect directly with travelers.
+                    </p>
+
+                    <!-- Features List -->
+                    <ul class="list-unstyled text-start mb-4">
+                        <li class="mb-2"><i class="bi bi-check-circle text-success"></i> Personal tours (up to 10)</li>
+                        <li class="mb-2"><i class="bi bi-check-circle text-success"></i> Direct bookings</li>
+                        <li class="mb-2"><i class="bi bi-check-circle text-success"></i> Personal profile</li>
+                        <li class="mb-2"><i class="bi bi-check-circle text-success"></i> Customer reviews</li>
+                    </ul>
+
+                    <!-- Select Button -->
+                    <form asp-controller="RoleSelection" asp-action="SelectRole" method="post">
+                        <input type="hidden" name="userType" value="TourGuide" />
+                        <button type="submit" class="btn btn-success btn-lg w-100">
+                            <i class="bi bi-person-badge"></i> Choose Guide Account
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tourist Card -->
+        <div class="col-lg-4 col-md-6">
+            <div class="card h-100 text-center border-info role-card">
+                <div class="card-body p-4">
+                    <!-- Large Icon -->
+                    <div class="mb-3">
+                        <i class="bi bi-backpack text-info" style="font-size: 4rem;"></i>
+                    </div>
+
+                    <!-- Title -->
+                    <h4 class="card-title fw-bold text-info mb-3">Tourist</h4>
+
+                    <!-- Description -->
+                    <p class="card-text text-muted mb-4">
+                        I'm looking to book amazing tours and experiences. I want to
+                        explore destinations and create memories.
+                    </p>
+
+                    <!-- Features List -->
+                    <ul class="list-unstyled text-start mb-4">
+                        <li class="mb-2"><i class="bi bi-check-circle text-success"></i> Browse all tours</li>
+                        <li class="mb-2"><i class="bi bi-check-circle text-success"></i> Easy booking system</li>
+                        <li class="mb-2"><i class="bi bi-check-circle text-success"></i> Booking history</li>
+                        <li class="mb-2"><i class="bi bi-check-circle text-success"></i> Leave reviews</li>
+                    </ul>
+
+                    <!-- Select Button -->
+                    <form asp-controller="RoleSelection" asp-action="SelectRole" method="post">
+                        <input type="hidden" name="userType" value="Tourist" />
+                        <button type="submit" class="btn btn-info btn-lg w-100">
+                            <i class="bi bi-backpack"></i> Choose Tourist Account
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Help Section -->
+<div class="bg-light py-4">
+    <div class="container text-center">
+        <h5 class="fw-bold mb-3">Need Help Choosing?</h5>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <p class="text-muted">
+                    <strong>Travel Agency:</strong> You run a travel business with multiple guides and tours.<br>
+                    <strong>Tour Guide:</strong> You're an individual offering your own specialized tours.<br>
+                    <strong>Tourist:</strong> You want to discover and book amazing travel experiences.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

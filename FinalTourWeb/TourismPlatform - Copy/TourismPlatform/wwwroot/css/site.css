@@ -1,0 +1,102 @@
+﻿html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+/* ⬇️ ADD THE NEW STYLES BELOW THIS LINE ⬇️ */
+
+/* Simple Tourism Platform Improvements */
+
+/* Make cards lift when hovered */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+}
+
+/* Make buttons more rounded and bold */
+.btn {
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+    /* Button hover effects */
+    .btn:hover {
+        transform: translateY(-2px);
+    }
+
+/* Make navbar brand stand out */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+/* Add some nice spacing */
+.display-4, .display-5 {
+    font-weight: 700;
+}
+/* Fix card images to have same size */
+.card-img-top {
+    height: 220px; /* keeps all card images same height */
+    object-fit: cover; /* crops instead of stretching */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+/* Card hover effect */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+/* Gradient header */
+.bg-primary {
+    background: linear-gradient(90deg, #4e54c8, #8f94fb);
+}
+
+/* Quick action buttons hover */
+.btn:hover {
+    transform: translateY(-2px);
+    transition: all 0.2s ease;
+}
+
+/* Gradient background for stats */
+.bg-info-gradient {
+    background: linear-gradient(90deg, #1fa2ff, #12d8fa, #a6ffcb);
+    color: white;
+}
+
+.bg-success-gradient {
+    background: linear-gradient(90deg, #56ab2f, #a8e063);
+    color: white;
+}
+
+.bg-warning-gradient {
+    background: linear-gradient(90deg, #f7971e, #ffd200);
+    color: white;
+}
+
+.bg-primary-gradient {
+    background: linear-gradient(90deg, #1e3c72, #2a5298);
+    color: white;
+}
