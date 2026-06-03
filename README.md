@@ -13,6 +13,8 @@ of concerns:
 ## 🛠️ Tech Stack
 - ASP.NET MVC
 - C#
+- HTML
+- JavaScript
 - Visual Studio 2022
 - SQL Server
 
